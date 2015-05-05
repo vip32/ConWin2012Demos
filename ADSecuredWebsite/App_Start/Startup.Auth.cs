@@ -21,7 +21,7 @@ namespace ADSecuredWebsite
             app.SetDefaultSignInAsAuthenticationType(CookieAuthenticationDefaults.AuthenticationType);
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
-
+            
             app.UseWsFederationAuthentication(
                 new WsFederationAuthenticationOptions
                 {

@@ -1,4 +1,5 @@
 ﻿using ADSecuredWebApi.Models;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Web.Http;
@@ -10,6 +11,15 @@ namespace ADSecuredWebApi.Controllers
     {
         // ToDo items list for all users
         static ConcurrentBag<ToDoItem> todoBag = new ConcurrentBag<ToDoItem>();
+
+        public TodoListController()
+        {
+            todoBag.Add(new ToDoItem
+                {
+                    Title = Guid.NewGuid().ToString()
+                }
+            );
+        }
 
         // GET api/todolist returns 
         public IEnumerable<ToDoItem> Get()
