@@ -30,13 +30,13 @@ namespace ADSecuredWebApiWPFClient
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            string authority = "https://fs.corp.contoso.com/adfs";
-            string resourceURI = "https://web1.corp.contoso.com/ADSecuredWebApi";
-            string clientID = "E1CF1107-FF90-4228-93BF-26052DD2C714"; // add this oauth clientid to adfs >> Add-AdfsClient -Name "ADSecuredWebApiWPFClient1" -ClientId "E1CF1107-FF90-4228-93BF-26052DD2C714" -RedirectUri "http://anarbitraryreturnuri/"
+            string authority = "https://fs.corp.contoso.com/adfs"; // the ADFS server
+            string resource = "https://web1.corp.contoso.com/ADSecuredWebApi"; // set this up as a relying party trust in ADFS
+            string clientId = "E1CF1107-FF90-4228-93BF-26052DD2C714"; // add this oauth clientid to adfs >> Add-AdfsClient -Name "ADSecuredWebApiWPFClient1" -ClientId "E1CF1107-FF90-4228-93BF-26052DD2C714" -RedirectUri "http://anarbitraryreturnuri/"
             string clientReturnURI = "http://anarbitraryreturnuri/";
 
             AuthenticationContext ac = new AuthenticationContext(authority, false);
-            AuthenticationResult ar = ac.AcquireToken(resourceURI, clientID, new Uri(clientReturnURI));
+            AuthenticationResult ar = ac.AcquireToken(resource, clientId, new Uri(clientReturnURI));
 
             string authHeader = ar.CreateAuthorizationHeader();
             HttpClient client = new HttpClient();
